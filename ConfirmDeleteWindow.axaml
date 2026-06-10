@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CalendarWidget.ConfirmDeleteWindow"
+        Title="Confirmar exclusão"
+        Width="260"
+        Height="160"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        WindowDecorations="None"
+        Background="Transparent"
+        TransparencyLevelHint="AcrylicBlur"
+        ClipToBounds="True">
+
+    <ExperimentalAcrylicBorder CornerRadius="16" Material="{StaticResource WidgetAcrylic}">
+        <StackPanel Margin="20" Spacing="16">
+
+            <TextBlock Text="Excluir evento" FontSize="15" FontWeight="Medium" Foreground="White"/>
+            <Border Height="1" Background="#18FFFFFF"/>
+            <TextBlock x:Name="EventNameLabel" FontSize="13" Foreground="#CCFFFFFF" TextWrapping="Wrap"/>
+
+            <Grid ColumnDefinitions="*, 8, *">
+                <Border Grid.Column="0" Background="#14FFFFFF" BorderBrush="#55FFFFFF" BorderThickness="1" CornerRadius="8" Cursor="Hand" x:Name="NoButton">
+                    <TextBlock Text="Não" FontSize="13" Foreground="#AAFFFFFF" HorizontalAlignment="Center" Padding="0,7"/>
+                </Border>
+                <Border Grid.Column="2" Background="#33f87171" BorderBrush="#66f87171" BorderThickness="1" CornerRadius="8" Cursor="Hand" x:Name="YesButton">
+                    <TextBlock Text="Sim" FontSize="13" Foreground="#f87171" HorizontalAlignment="Center" Padding="0,7"/>
+                </Border>
+            </Grid>
+
+        </StackPanel>
+    </ExperimentalAcrylicBorder>
+</Window>

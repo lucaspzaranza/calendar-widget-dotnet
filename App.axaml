@@ -1,0 +1,77 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CalendarWidget.App"
+             RequestedThemeVariant="Dark">
+
+    <Application.Styles>
+        <FluentTheme />        
+        <Style Selector="MenuItem">
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- 1. Define as dimensões travadas do ScrollBar -->
+        <Style Selector="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="MinWidth" Value="6"/>
+            <Setter Property="MaxWidth" Value="6"/>
+        </Style>
+        <Style Selector="ScrollBar:vertical, ScrollBar:vertical:pointerover, ScrollBar:vertical:pressed">
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="MinWidth" Value="6"/>
+            <Setter Property="MaxWidth" Value="6"/>
+        </Style>
+
+        <!-- 2. ESCONDER A TRACK: Remove o retângulo de fundo do FluentTheme (Mesmo sob Hover) -->
+        <Style Selector="ScrollBar /template/ Rectangle#TrackRect">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Stroke" Value="Transparent"/>
+        </Style>
+        <Style Selector="ScrollBar[IsExpanded=true] /template/ Rectangle#TrackRect">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Stroke" Value="Transparent"/>
+        </Style>
+        
+        <Style Selector="ScrollBar /template/ RepeatButton">
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
+
+        <!-- 3. CORNER RADIUS DO THUMB: Ignora o layout nativo e reconstrói o visual arredondado do zero -->
+        <Style Selector="ScrollBar /template/ Thumb">
+            <!-- Força o plano de fundo diretamente no objeto Thumb -->
+            <Setter Property="Background" Value="#33FFFFFF"/>
+            <!-- Aplica a propriedade de corte interno para moldar qualquer elemento filho -->
+            <Setter Property="ClipToBounds" Value="True"/>
+            <!-- Anula o estilo padrão do Fluent substituindo o template interno por uma borda pura -->
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="10"/> <!-- Metade da largura (6px) cria a pílula perfeita -->
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <!-- 4. Estados do mouse sobre o novo Thumb reconstruído -->
+        <Style Selector="ScrollBar /template/ Thumb:pointerover">
+            <Setter Property="Background" Value="#55FFFFFF"/>
+        </Style>
+        <Style Selector="ScrollBar /template/ Thumb:pressed">
+            <Setter Property="Background" Value="#77FFFFFF"/>
+        </Style>
+
+    </Application.Styles>
+
+    <Application.Resources>
+        <!-- Tudo envelopado dentro de um único ResourceDictionary principal -->
+        <ResourceDictionary>
+            <!-- O seu CornerRadius agora fica aqui dentro com segurança -->
+            <CornerRadius x:Key="ScrollBarThumbCornerRadius">20</CornerRadius>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

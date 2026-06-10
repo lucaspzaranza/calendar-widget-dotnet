@@ -1,0 +1,131 @@
+<Window xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="CalendarWidget.MainWindow"
+    Title="CalendarWidget"
+    Width="300"
+    SizeToContent="Height"
+    CanResize="False"
+    ShowInTaskbar="False"
+    WindowDecorations="None"
+    Background="Transparent"
+    TransparencyLevelHint="Transparent" 
+    ClipToBounds="True"
+>
+    <Window.Styles>
+        <!-- Estilo que rotaciona continuamente qualquer elemento com a classe "spinner" -->
+        <Style Selector="Arc.spinner">
+            <Style.Animations>
+                <Animation Duration="0:0:1" IterationCount="Infinite">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="RotateTransform.Angle" Value="0"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="RotateTransform.Angle" Value="360"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+    </Window.Styles>
+
+    <Panel>
+        <Border CornerRadius="8" Background="#80000000">
+            <StackPanel Margin="18">
+                <!-- Cabeçalho -->
+                <Grid ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,0">
+                    <Border Grid.Column="0" Background="#14FFFFFF" BorderBrush="#55FFFFFF" BorderThickness="1" CornerRadius="8" Width="28" Height="28" Cursor="Hand" x:Name="PrevButton">
+                        <ToolTip.Tip>Mês Anterior</ToolTip.Tip>
+                        <TextBlock Text="‹" FontSize="24" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock x:Name="MonthLabel" Text="Junho 2026" FontSize="15" FontWeight="Medium" Foreground="White" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6">
+                        <Border Background="#14FFFFFF" BorderBrush="#55FFFFFF" BorderThickness="1" CornerRadius="8" Width="28" Height="28" Cursor="Hand" x:Name="NextButton">
+                            <ToolTip.Tip>Próximo Mês</ToolTip.Tip>
+                            <TextBlock Text="›" FontSize="24" Foreground="#AAFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                        </Border>
+                        <Border x:Name="GoogleButton" Background="#14FFFFFF" BorderBrush="#55FFFFFF" BorderThickness="1" CornerRadius="8" Width="28" Height="28" Cursor="Hand">
+                            <Image x:Name="GoogleIcon" Width="14" Height="14"/>
+                        </Border>
+                        <Border Background="#14FFFFFF" BorderBrush="#55FFFFFF" BorderThickness="1" CornerRadius="8" Width="28" Height="28" Cursor="Hand" x:Name="CloseButton">
+                            <ToolTip.Tip>Fechar</ToolTip.Tip>
+                            <TextBlock Text="×" FontSize="24" Foreground="#88FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Separador -->
+                <Border Height="1" Background="#18FFFFFF" Margin="0,10,0,10"/>
+
+                <!-- Dias da semana -->
+                <UniformGrid Rows="1" Columns="7" Margin="0,0,0,4">
+                    <TextBlock Text="DOM" FontSize="11" Foreground="#CCFFFFFF" HorizontalAlignment="Center" FontWeight="UltraBlack"/>
+                    <TextBlock Text="SEG" FontSize="11" Foreground="#CCFFFFFF" HorizontalAlignment="Center" FontWeight="UltraBlack"/>
+                    <TextBlock Text="TER" FontSize="11" Foreground="#CCFFFFFF" HorizontalAlignment="Center" FontWeight="UltraBlack"/>
+                    <TextBlock Text="QUA" FontSize="11" Foreground="#CCFFFFFF" HorizontalAlignment="Center" FontWeight="UltraBlack"/>
+                    <TextBlock Text="QUI" FontSize="11" Foreground="#CCFFFFFF" HorizontalAlignment="Center" FontWeight="UltraBlack"/>
+                    <TextBlock Text="SEX" FontSize="11" Foreground="#CCFFFFFF" HorizontalAlignment="Center" FontWeight="UltraBlack"/>
+                    <TextBlock Text="SAB" FontSize="11" Foreground="#CCFFFFFF" HorizontalAlignment="Center" FontWeight="UltraBlack"/>
+                </UniformGrid>
+
+                <!-- Grid dos dias -->
+                <UniformGrid x:Name="DaysGrid" Columns="7" Margin="0,0,0,0"/>
+
+                <!-- Separador -->
+                <Panel Margin="0,10,0,10"/>
+
+                <!-- Título da seção + botão adicionar -->
+                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,8">
+                    <TextBlock Grid.Column="0"
+                            x:Name="TodayLabel"
+                            FontSize="12"
+                            Foreground="white"
+                            FontWeight="Medium"
+                            LetterSpacing="1.5"
+                            VerticalAlignment="Center"/>
+                    <Border Grid.Column="1"
+                            Background="#14FFFFFF"
+                            BorderBrush="white"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Width="80" Height="24"
+                            Cursor="Hand"
+                            x:Name="AddEventButton">
+                        <TextBlock Text="+ Evento" FontSize="14" Foreground="white"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0,0,0,2"/>
+                    </Border>
+                </Grid>
+
+                <!-- Lista de eventos -->
+                <ScrollViewer MaxHeight="180" AllowAutoHide="False">
+                    <StackPanel Spacing="6" x:Name="EventsList"/>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+
+        <!-- Overlay de loading -->
+        <Border x:Name="LoadingOverlay"
+                IsVisible="False"
+                Background="#55000000"
+                CornerRadius="8">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="0">
+                <Grid>
+                    <Arc Classes="spinner"
+                        Width="40" Height="40"
+                        Stroke="DodgerBlue" 
+                        StrokeThickness="4"
+                        StartAngle="0" 
+                        SweepAngle="270"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" />
+                </Grid>
+                <TextBlock Text="Carregando..."
+                        FontSize="14"
+                        Foreground="#77FFFFFF"
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Panel>
+</Window>

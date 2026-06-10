@@ -1,0 +1,9 @@
+bin/
+obj/
+*.user
+.vs/
+publish/
+*.pdb
+*.json
+CalendarWidgetGoogle.txt
+client_secret_*.json

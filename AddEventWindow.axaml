@@ -1,0 +1,110 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CalendarWidget.AddEventWindow"
+        Title="Novo Evento"
+        Width="280"
+        Height="405"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        WindowDecorations="None"
+        Background="Transparent"
+        TransparencyLevelHint="AcrylicBlur"
+        ClipToBounds="True">
+
+    <ExperimentalAcrylicBorder CornerRadius="16" Material="{StaticResource WidgetAcrylic}">
+        <StackPanel Margin="20" Spacing="12">
+
+            <!-- Cabeçalho -->
+            <Grid ColumnDefinitions="*, Auto">
+                <Grid ColumnDefinitions="*, Auto">
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <TextBlock x:Name="TitleLabel" FontSize="15" FontWeight="Medium" Foreground="White"/>
+                    </StackPanel>
+                    <Border Grid.Column="1" Background="#14FFFFFF" BorderBrush="#55FFFFFF" BorderThickness="1" CornerRadius="8" Width="28" Height="28" Cursor="Hand" x:Name="CloseButton">
+                        <TextBlock Text="×" FontSize="24" Foreground="#88FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5"/>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Border Height="1" Background="#18FFFFFF"/>
+
+            <!-- Nome -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Nome" FontSize="11" Foreground="#77FFFFFF"/>
+                <TextBox x:Name="NameInput"
+                         PlaceholderText="Ex: Reunião de planejamento"
+                         Background="#14FFFFFF"
+                         Foreground="White"
+                         BorderBrush="#33FFFFFF"
+                         BorderThickness="1"
+                         CornerRadius="8"
+                         Padding="10,6"/>
+            </StackPanel>
+
+            <!-- Horário -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Horário" FontSize="11" Foreground="#77FFFFFF"/>
+                <TextBox x:Name="TimeInput"
+                         PlaceholderText="Ex: 09:00"
+                         Background="#14FFFFFF"
+                         Foreground="White"
+                         BorderBrush="#33FFFFFF"
+                         BorderThickness="1"
+                         CornerRadius="8"
+                         Padding="10,6"/>
+            </StackPanel>
+
+            <!-- Cor -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Cor" FontSize="11" Foreground="#77FFFFFF"/>
+                <WrapPanel x:Name="ColorPicker" MaxWidth="240">
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#ac725e" Cursor="Hand" x:Name="Color1"  Tag="#ac725e" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#d06b64" Cursor="Hand" x:Name="Color2"  Tag="#d06b64" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#f83a22" Cursor="Hand" x:Name="Color3"  Tag="#f83a22" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#fa573c" Cursor="Hand" x:Name="Color4"  Tag="#fa573c" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#ff7537" Cursor="Hand" x:Name="Color5"  Tag="#ff7537" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#ffad46" Cursor="Hand" x:Name="Color6"  Tag="#ffad46" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#42d692" Cursor="Hand" x:Name="Color7"  Tag="#42d692" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#16a765" Cursor="Hand" x:Name="Color8"  Tag="#16a765" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#7bd148" Cursor="Hand" x:Name="Color9"  Tag="#7bd148" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#b3dc6c" Cursor="Hand" x:Name="Color10" Tag="#b3dc6c" Margin="3"/>
+                    <Border Width="28" Height="28" CornerRadius="14" Background="#4986e7" Cursor="Hand" x:Name="Color11" Tag="#4986e7" Margin="3"/>
+                </WrapPanel>
+            </StackPanel>
+            <!-- <StackPanel Spacing="4">
+                <TextBlock Text="Cor" FontSize="11" Foreground="#77FFFFFF"/>
+                <StackPanel Orientation="Horizontal" Spacing="8" x:Name="ColorPicker">
+                    <Border Width="24" Height="24" CornerRadius="12" Background="#60a5fa" Cursor="Hand" x:Name="Color1" Tag="#60a5fa"/>
+                    <Border Width="24" Height="24" CornerRadius="12" Background="#fbbf24" Cursor="Hand" x:Name="Color2" Tag="#fbbf24"/>
+                    <Border Width="24" Height="24" CornerRadius="12" Background="#c084fc" Cursor="Hand" x:Name="Color3" Tag="#c084fc"/>
+                    <Border Width="24" Height="24" CornerRadius="12" Background="#34d399" Cursor="Hand" x:Name="Color4" Tag="#34d399"/>
+                    <Border Width="24" Height="24" CornerRadius="12" Background="#f87171" Cursor="Hand" x:Name="Color5" Tag="#f87171"/>
+                </StackPanel>
+            </StackPanel> -->
+
+            <!-- Destino -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="Salvar em" FontSize="11" Foreground="#77FFFFFF"/>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Border x:Name="ToggleLocal"
+                            Background="#33a8d4ff" BorderBrush="#66a8d4ff" BorderThickness="1"
+                            CornerRadius="6" Padding="10,5" Cursor="Hand">
+                        <TextBlock x:Name="ToggleLocalText" Text="Local" FontSize="12" Foreground="#a8d4ff"/>
+                    </Border>
+                    <Border x:Name="ToggleGoogle"
+                            Background="#14FFFFFF" BorderBrush="#33FFFFFF" BorderThickness="1"
+                            CornerRadius="6" Padding="10,5" Cursor="Hand">
+                        <TextBlock x:Name="ToggleGoogleText" Text="Google Calendar" FontSize="12" Foreground="#AAFFFFFF"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Botão salvar -->
+            <Border Background="#33a8d4ff" BorderBrush="#66a8d4ff" BorderThickness="1" CornerRadius="8" Cursor="Hand" x:Name="SaveButton" Margin="0,4,0,0">
+                <TextBlock x:Name="SaveLabel" Text="Adicionar Evento" FontSize="13" Foreground="#a8d4ff" HorizontalAlignment="Center" Padding="0,8"/>
+            </Border>
+
+        </StackPanel>
+    </ExperimentalAcrylicBorder>
+
+</Window>
