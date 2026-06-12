@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -16,6 +17,7 @@
     <PackageReference Include="Avalonia.Desktop" Version="12.0.4" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.4" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.4" />
+    <PackageReference Include="Avalonia.Svg" Version="11.3.0" />
     <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.1">
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
@@ -27,11 +29,4 @@
     <AvaloniaResource Include="Assets/**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <TrimmerRootAssembly Include="Google.Apis.Auth"/>
-    <TrimmerRootAssembly Include="Google.Apis"/>
-    <TrimmerRootAssembly Include="Google.Apis.Calendar.v3"/>
-    <TrimmerRootAssembly Include="Google.Apis.Core"/>
-    <TrimmerRootAssembly Include="Newtonsoft.Json"/>
-  </ItemGroup>
 </Project>

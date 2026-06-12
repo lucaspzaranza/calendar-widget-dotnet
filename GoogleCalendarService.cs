@@ -62,7 +62,7 @@ public class GoogleCalendarService
         return "#4986e7";
     }
 
-    private static void Log(string msg)
+    public static void Log(string msg)
     {
         try
         {
@@ -133,7 +133,7 @@ public class GoogleCalendarService
             request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
 
             var result = await request.ExecuteAsync();
-            Console.WriteLine($"Google eventos encontrados: {result.Items?.Count ?? 0}");
+            Console.WriteLine($"Google eventos encontrados pro dia de hoje: {result.Items?.Count ?? 0}");
 
             foreach (var e in result.Items ?? new List<Google.Apis.Calendar.v3.Data.Event>())
                 Console.WriteLine($"  - {e.Summary} | {e.Start?.DateTimeRaw ?? e.Start?.Date}");

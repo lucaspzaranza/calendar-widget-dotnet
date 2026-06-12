@@ -18,13 +18,23 @@ public class EventStore
     {
         try
         {
+            GoogleCalendarService.Log($"EventsPath: {EventsPath}");
+            GoogleCalendarService.Log($"events.json existe: {File.Exists(EventsPath)}");
+
             if (!File.Exists(EventsPath)) return;
+
             var json = File.ReadAllText(EventsPath);
+            GoogleCalendarService.Log($"JSON lido: {json}");
+
             var doc = JsonDocument.Parse(json);
             var arr = doc.RootElement.GetProperty("events");
             _events = JsonSerializer.Deserialize<List<CalendarEvent>>(arr.GetRawText()) ?? new();
+            GoogleCalendarService.Log($"Eventos locais carregados: {_events.Count}");
         }
-        catch { }
+        catch (Exception ex)
+        {
+            GoogleCalendarService.Log($"EventStore.Load ERRO: {ex.Message}");
+        }
     }
 
     public void Save()

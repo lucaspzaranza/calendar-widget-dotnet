@@ -49,6 +49,9 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
+        GoogleCalendarService.Log("================================");
+        GoogleCalendarService.Log("Iniciando Widget...");
+
         InitializeComponent();
         // Opcional: Remove a barra superior e as bordas para parecer um Widget real
         WindowDecorations = WindowDecorations.None; 
@@ -499,6 +502,8 @@ public partial class MainWindow : Window
                 CornerRadius = new CornerRadius(10),
                 Padding = new Thickness(0),
             };
+            
+            ToolTip.SetTip(card, $"{evt.Name} — {evt.Time}");
 
             var grid = new Grid();
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(4) });
