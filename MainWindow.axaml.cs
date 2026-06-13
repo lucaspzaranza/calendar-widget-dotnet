@@ -496,6 +496,7 @@ public partial class MainWindow : Window
         {
             var card = new Border
             {
+                Width = 250,
                 Background = SolidColorBrush.Parse("#0AFFFFFF"),
                 BorderBrush = SolidColorBrush.Parse("#15FFFFFF"),
                 BorderThickness = new Thickness(1),
